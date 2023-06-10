@@ -7,25 +7,55 @@
     android:background="#F3EDED"
     tools:context="br.com.italents.deliveryapp.ui.HomeActivity">
 
-    <TextView
-        android:id="@+id/nameDelivery"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinnerAddress"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="@string/name_android_delivery"
-        android:textColor="@color/color_default"
-        android:textSize="@dimen/dimen_50_sp"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="Digite seu endereco"
+        android:textColor="@color/color_default"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerAddress" />
+
+    <Button
+        android:id="@+id/btnFinishAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Salvar"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/edAddress"
+        app:layout_constraintTop_toBottomOf="@id/edAddress" />
+
+    <ImageView
+        android:id="@+id/iconAddAddress"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerAddress"
+        tools:src="@drawable/ic_address" />
 
     <TextView
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/name_android_delivery"
         android:textSize="@dimen/dimen_25_sp"
-        app:layout_constraintStart_toStartOf="@id/nameDelivery"
-        app:layout_constraintTop_toBottomOf="@id/nameDelivery" />
+        app:layout_constraintStart_toStartOf="@id/btnFinishAddress"
+        app:layout_constraintTop_toBottomOf="@id/btnFinishAddress" />
 
     <TextView
         android:id="@+id/makeOrder"
@@ -40,8 +70,8 @@
         android:id="@+id/rcListProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -50,6 +80,8 @@
 
     <include
         android:id="@+id/menu"
-        layout="@layout/menu" />
+        layout="@layout/menu"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
