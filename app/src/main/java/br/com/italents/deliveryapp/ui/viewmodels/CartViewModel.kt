@@ -40,7 +40,7 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
     fun createProduct(createCart: CartProduct): LiveData<Resource<CartResponse>> = liveData {
         emit(Resource.loading())
 
-        try{
+        try {
             val result = cartRepository.createCart(createCart)
 
             if (result.isSuccessful && result.body() != null) {
@@ -57,7 +57,7 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
     fun getCart(idCart: String): LiveData<Resource<CartResponse>> = liveData {
         emit(Resource.loading())
 
-        try{
+        try {
             val result = cartRepository.getCart(idCart)
 
             if (result.isSuccessful && result.body() != null) {
@@ -73,29 +73,35 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
         }
     }
 
-    fun updateCart(idCart: String, cartProduct: CartProduct): LiveData<Resource<CartResponse>> = liveData {
-        emit(Resource.loading())
+    fun updateCart(idCart: String, cartProduct: CartProduct): LiveData<Resource<CartResponse>> =
+        liveData {
+            emit(Resource.loading())
 
-        try{
-            val result = cartRepository.updateCart(idCart, cartProduct)
+            try {
+                val result = cartRepository.updateCart(idCart, cartProduct)
 
-            if (result.isSuccessful && result.body() != null) {
-                emit(Resource(Resource.Status.SUCCESS, result.body()))
-            } else {
+                if (result.isSuccessful && result.body() != null) {
+                    emit(Resource(Resource.Status.SUCCESS, result.body()))
+                } else {
+                    emit(Resource(Resource.Status.ERROR))
+                }
+            } catch (e: Exception) {
+                Log.i("Exception", "Exception no make login ${e.toString()}")
                 emit(Resource(Resource.Status.ERROR))
             }
-        } catch (e: Exception) {
-            Log.i("Exception", "Exception no make login ${e.toString()}")
-            emit(Resource(Resource.Status.ERROR))
         }
-    }
 
     fun getTotalPrice(): Double {
-        var totalPrice = 0.1
+        var totalPrice = 0.0
 
-       _product.value?.forEach{
-           totalPrice += it.priceUnit
-       }
+        _product.value?.forEach {
+            totalPrice += it.priceUnit
+        }
+
+        if (totalPrice <= 0) {
+            totalPrice = 0.1
+            return totalPrice
+        }
 
         return totalPrice
     }

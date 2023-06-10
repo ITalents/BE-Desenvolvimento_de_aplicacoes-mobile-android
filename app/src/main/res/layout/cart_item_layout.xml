@@ -67,7 +67,7 @@
             android:id="@+id/totalOfProducts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Double.toString(product.quantity)}"
+            android:text="@{Integer.toString(product.quantity)}"
             android:textColor="@color/black"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@id/iconLess"

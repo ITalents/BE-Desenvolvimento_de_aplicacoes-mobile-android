@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/menu_register_customer"
-        android:title="Cadastrar Cliente"
+        android:title="Cliente"
         android:icon="@drawable/ic_person_add" />
 
     <item
@@ -17,6 +17,11 @@
 
     <item
         android:id="@+id/menu_register_product"
-        android:title="Cadastrar Produto"
+        android:title="Produto"
         android:icon="@drawable/ic_edit" />
+
+    <item
+        android:id="@+id/menu_products_favorite"
+        android:title="Favoritos"
+        android:icon="@drawable/ic_favorite" />
 </menu>

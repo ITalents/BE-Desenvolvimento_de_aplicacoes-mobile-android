@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F3EDED"
+    android:layout_marginBottom="25dp">
+
+    <ImageView
+        android:id="@+id/imageProductFavorite"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/nameProductFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageProductFavorite"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Torta de limão" />
+
+    <TextView
+        android:id="@+id/priceUnitProductFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@id/nameProductFavorite"
+        app:layout_constraintStart_toStartOf="@id/nameProductFavorite"
+        app:layout_constraintTop_toBottomOf="@id/nameProductFavorite"
+        tools:text="R$22,90" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
