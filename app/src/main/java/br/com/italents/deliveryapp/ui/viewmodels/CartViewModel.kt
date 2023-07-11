@@ -1,20 +1,22 @@
 package br.com.italents.deliveryapp.ui.viewmodels
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import br.com.italents.deliveryapp.data.Resource
 import br.com.italents.deliveryapp.data.models.CartProduct
 import br.com.italents.deliveryapp.data.models.CartResponse
 import br.com.italents.deliveryapp.data.models.Product
 import br.com.italents.deliveryapp.data.repositories.CartRepository
+import br.com.italents.deliveryapp.data.repositories.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CartViewModel @Inject constructor(private val cartRepository: CartRepository) : ViewModel() {
+class CartViewModel @Inject constructor(
+    private val cartRepository: CartRepository,
+    private val orderRepository: OrderRepository
+) : ViewModel() {
 
     private val _product: MutableLiveData<MutableList<Product>> =
         MutableLiveData<MutableList<Product>>().apply { value = mutableListOf() }
@@ -142,6 +144,12 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
         }
 
         return _product.value as List<Product>
+    }
+
+    fun insertOrder(totalPrice: String) {
+        viewModelScope.launch {
+            orderRepository.insertNewOrder(totalPrice)
+        }
     }
 
 }

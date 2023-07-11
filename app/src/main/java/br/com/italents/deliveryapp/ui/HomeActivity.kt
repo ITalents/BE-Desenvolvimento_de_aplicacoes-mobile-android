@@ -17,7 +17,7 @@ import br.com.italents.deliveryapp.data.models.Address
 import br.com.italents.deliveryapp.data.models.Product
 import br.com.italents.deliveryapp.data.util.SharedPreferences
 import br.com.italents.deliveryapp.databinding.ActivityHomeBinding
-import br.com.italents.deliveryapp.menu.Menu
+import br.com.italents.deliveryapp.ui.menu.Menu
 import br.com.italents.deliveryapp.ui.adapters.ProductAdapter
 import br.com.italents.deliveryapp.ui.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +33,8 @@ class HomeActivity : AppCompatActivity(), ProductAdapter.ProductHome {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding.activity = this
+
         setContentView(binding.root)
 
         observers()
@@ -42,10 +44,13 @@ class HomeActivity : AppCompatActivity(), ProductAdapter.ProductHome {
         handleSaveAddress(binding)
         spinner = binding.spinnerAddress
 
-
         onSelectedItemSpinner()
     }
 
+
+    fun onClickOrders() {
+        startActivity(Intent(this, OrderActivity::class.java))
+    }
 
     private fun observers() {
         homeViewModel.getProducts().observe(this) { response ->

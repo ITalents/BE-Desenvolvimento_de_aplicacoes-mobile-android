@@ -11,7 +11,7 @@ import br.com.italents.deliveryapp.data.models.CartProduct
 import br.com.italents.deliveryapp.data.models.Product
 import br.com.italents.deliveryapp.data.util.SharedPreferences
 import br.com.italents.deliveryapp.databinding.ActivityCartBinding
-import br.com.italents.deliveryapp.menu.Menu
+import br.com.italents.deliveryapp.ui.menu.Menu
 import br.com.italents.deliveryapp.ui.adapters.CartAdapter
 import br.com.italents.deliveryapp.ui.interfaces.ProductCart
 import br.com.italents.deliveryapp.ui.viewmodels.CartViewModel
@@ -45,6 +45,21 @@ class CartActivity : AppCompatActivity(), ProductCart {
         existCart = SharedPreferences.existCart ?: false
 
         handleObservers()
+
+        binding.buttonFinishPay.setOnClickListener {
+            cartViewModel.insertOrder(cartViewModel.getTotalPrice().toString())
+
+            cartViewModel.product.value?.forEach {
+                cartViewModel.deleteProduct(it)
+            }
+
+            cartViewModel.product.value?.let {
+                adapter.setItems(it)
+                updateCart()
+            }
+
+            binding.totalPrice.text = "0"
+        }
     }
 
     private fun handleObservers() {
@@ -55,7 +70,12 @@ class CartActivity : AppCompatActivity(), ProductCart {
                         //
                     }
                     Resource.Status.ERROR -> {
-                        Toasty.error(this, "Um erro ocorreu ao buscar os produtos do carrinho", Toast.LENGTH_LONG, true).show();
+                        Toasty.error(
+                            this,
+                            "Um erro ocorreu ao buscar os produtos do carrinho",
+                            Toast.LENGTH_LONG,
+                            true
+                        ).show();
                     }
                     Resource.Status.SUCCESS -> {
                         if (isNotNullProduct) {
@@ -83,7 +103,12 @@ class CartActivity : AppCompatActivity(), ProductCart {
                         //
                     }
                     Resource.Status.ERROR -> {
-                        Toasty.error(this, "Um erro ocorreu ao criar o carrinho", Toast.LENGTH_LONG, true).show();
+                        Toasty.error(
+                            this,
+                            "Um erro ocorreu ao criar o carrinho",
+                            Toast.LENGTH_LONG,
+                            true
+                        ).show();
                     }
                     Resource.Status.SUCCESS -> {
                         response.data?.let {
@@ -115,7 +140,12 @@ class CartActivity : AppCompatActivity(), ProductCart {
                         //
                     }
                     Resource.Status.ERROR -> {
-                        Toasty.error(this, "Um erro ocorreu ao atualizar o carrinho", Toast.LENGTH_LONG, true).show();
+                        Toasty.error(
+                            this,
+                            "Um erro ocorreu ao atualizar o carrinho",
+                            Toast.LENGTH_LONG,
+                            true
+                        ).show();
                     }
                     Resource.Status.SUCCESS -> {
                         response.data?.products?.let {

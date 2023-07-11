@@ -1,4 +1,4 @@
-package br.com.italents.deliveryapp.menu
+package br.com.italents.deliveryapp.ui.menu
 
 import android.content.Context
 import android.content.Intent

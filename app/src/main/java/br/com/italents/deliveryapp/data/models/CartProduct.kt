@@ -9,4 +9,8 @@ data class CartProduct(
     val totalPrice: Double,
     @SerializedName("frete")
     val freight: Double
-)
+) {
+    fun returnTotalPrice(): Double {
+        return totalPrice
+    }
+}

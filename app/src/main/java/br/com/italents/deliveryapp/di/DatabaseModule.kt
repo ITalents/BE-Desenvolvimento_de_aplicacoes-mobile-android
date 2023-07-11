@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import br.com.italents.deliveryapp.data.local.DeliveryDatabase
 import br.com.italents.deliveryapp.data.local.dao.AddressDao
+import br.com.italents.deliveryapp.data.local.dao.OrderDao
 import br.com.italents.deliveryapp.data.local.dao.ProductFavoriteDao
 import dagger.Module
 import dagger.Provides
@@ -30,4 +31,8 @@ object DatabaseModule {
     @Provides
     fun provideAddressDao(database: DeliveryDatabase): AddressDao =
         database.addressDao()
+
+    @Provides
+    fun provideOrderDao(database: DeliveryDatabase): OrderDao =
+        database.orderDao()
 }

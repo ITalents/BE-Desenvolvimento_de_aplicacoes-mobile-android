@@ -1,8 +1,10 @@
 package br.com.italents.deliveryapp.di
 
 import br.com.italents.deliveryapp.data.local.dao.AddressDao
+import br.com.italents.deliveryapp.data.local.dao.OrderDao
 import br.com.italents.deliveryapp.data.local.dao.ProductFavoriteDao
 import br.com.italents.deliveryapp.data.local.datasource.AddressLocalDataSource
+import br.com.italents.deliveryapp.data.local.datasource.OrderLocalDataSource
 import br.com.italents.deliveryapp.data.local.datasource.ProductFavoriteLocalDataSource
 import br.com.italents.deliveryapp.data.remote.LoginRemoteDataSource
 import br.com.italents.deliveryapp.data.service.LoginService
@@ -25,6 +27,11 @@ object LocalDataSourceModule {
     @Provides
     fun provideAddressLocalDataSource(addressDao: AddressDao): AddressLocalDataSource =
         AddressLocalDataSource(addressDao)
+
+    @Singleton
+    @Provides
+    fun provideOrderLocalDataSource(orderDao: OrderDao): OrderLocalDataSource =
+        OrderLocalDataSource(orderDao)
 }
 
 
